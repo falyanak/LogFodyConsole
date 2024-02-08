@@ -30,7 +30,7 @@ public sealed class LogAttribute : OnMethodBoundaryAspect
     }
     public override void OnExit(MethodExecutionArgs args)
     {
-        var msg = $"LogAttribute On exit {args.Method.Name} retour = ";
+        var msg = $"On exit LogAttribute {args.Method.Name} retour = ";
 
         if (args.ReturnValue is Task task)
         {
@@ -41,8 +41,8 @@ public sealed class LogAttribute : OnMethodBoundaryAspect
                     var result = task.GetType().GetProperty("Result")?.GetValue(task);
 
                     string jsonString = JsonSerializer.Serialize(result);
-                    WriteLine("LogAttribute Task : " + msg + jsonString);
-                    Logger.LogInformation("LogAttribute Task : {msg} {Paramètres} ", msg, jsonString);
+                    WriteLine(msg + jsonString + " LogAttribute Task");
+                    Logger.LogInformation( "{msg} {Paramètres} LogAttribute Task ", msg, jsonString);
                 });
             }
         }

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using static System.Console;
 
-[MemoryDiagnoser]
+//[MemoryDiagnoser]
 public class Program
 {
     private static async Task<int> Main(string[] args)
@@ -36,10 +36,15 @@ public class Program
 
                 logger.LogInformation("Dans Program Main"); // test OK
 
-                // appel de l'instance avec le logger
-                var taskResult = await new Sample(logger).ManagePerson();
+                // injection du logger
+                var sample = new Sample(logger);
 
-                WriteLine("Success !");
+                var taskResult = await sample.ManagePerson();
+
+                if (taskResult.IsCompleted)
+                {
+                    WriteLine("Tâche complète = " + taskResult.IsCompleted);
+                }
             }
             catch (Exception ex)
             {

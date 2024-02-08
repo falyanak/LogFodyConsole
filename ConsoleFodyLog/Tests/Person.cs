@@ -22,7 +22,7 @@ namespace ConsoleFodyLog
         public string Title { get; set; }
 
 
-        [Log]
+      //  [Log]
         public async Task<string> UpperName(string name)
         {
             await Task.Delay(500);
@@ -31,7 +31,7 @@ namespace ConsoleFodyLog
             return name.ToUpper();
         }
 
-        [Log]
+      //  [Log]
         public async Task<Person> PersonWithUpperName(Person person)
         {
             string uName = await UpperName(person.Name);
